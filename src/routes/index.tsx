@@ -79,7 +79,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
           <a href="#inicio" className="block h-12 w-40 overflow-hidden">
-            <img src={logo.url} alt="JCV Fitness Center" className="h-full w-full scale-[1.75] object-cover object-center" />
+            <img src={logo.url} alt="JCV Fitness Center" className="h-full w-full object-cover object-center" />
           </a>
           <nav className="hidden gap-7 font-cond text-sm font-bold uppercase tracking-widest md:flex">
             {["Planes", "Clases", "Coaches", "Instalaciones", "Sucursales"].map((l) => (
