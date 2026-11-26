@@ -1,12 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png.asset.json";
 import floor from "@/assets/floor.png.asset.json";
-import horario from "@/assets/horario.jpg.asset.json";
 import planes from "@/assets/planes.jpg.asset.json";
-import karina from "@/assets/karina.jpg.asset.json";
-import pablo from "@/assets/pablo.jpg.asset.json";
-import fachada from "@/assets/fachada.jpg.asset.json";
-import spinning from "@/assets/spinning.jpg.asset.json";
+import spinning from "@/assets/spinning2.png.asset.json";
+import power from "@/assets/power.png.asset.json";
+import mancuernas from "@/assets/mancuernas.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,23 +31,6 @@ const plans = [
   { name: "Anual", price: "7,500", note: "El mejor precio por mes" },
 ];
 
-type Coach = { name: string; role: string; info: string; photo?: string; tag?: string };
-const coaches: Coach[] = [
-  { name: "Coach Pablo", role: "Boxeo", info: "Clases de box en ambas sucursales. Guantes y material incluidos en tu mensualidad.", photo: pablo.url, tag: "Box" },
-  { name: "Karina Gamboa", role: "Entrenadora personal", info: "Más de 11 años en JCV entrenando a socios de forma personalizada.", photo: karina.url, tag: "PT" },
-  { name: "Amparano PT", role: "Personal trainer", info: "20 años de experiencia. Prescripción del ejercicio para lesiones y rehabilitación. JCV Mega.", tag: "PT" },
-  { name: "Vladimir Bustamante", role: "Fuerza y resistencia", info: "Clases de fuerza, resistencia y yoga con pesas.", tag: "Fuerza" },
-  { name: "Sergio", role: "Body Combat", info: "Lunes, miércoles y viernes 8:15 AM.", tag: "Clase" },
-  { name: "Cynthia", role: "Body Pump", info: "Martes y jueves 8:15 AM.", tag: "Clase" },
-  { name: "Adrián", role: "Body Pump", info: "Lunes, miércoles y viernes 7:15 PM.", tag: "Clase" },
-  { name: "Oscar", role: "Zumba", info: "Lunes a viernes 6:00 PM.", tag: "Clase" },
-  { name: "Charly", role: "Ritmos Latinos", info: "Lunes a viernes 9:15 AM.", tag: "Clase" },
-  { name: "Qat", role: "Ritmos Latinos", info: "Lunes a viernes 7:00 AM.", tag: "Clase" },
-  { name: "Alejandra", role: "Pilates Mat", info: "Martes y jueves 7:15 PM.", tag: "Clase" },
-  { name: "Esthela", role: "Yoga", info: "Lunes, miércoles y viernes 8:15 PM.", tag: "Clase" },
-  { name: "Adriana", role: "Yoga", info: "Martes y jueves 8:15 PM.", tag: "Clase" },
-];
-
 const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 const schedule: [string, [string, string][]][] = [
   ["7:00 AM", Array(5).fill(["Ritmos Latinos", "Qat"])],
@@ -72,6 +54,42 @@ function Title({ children }: { children: React.ReactNode }) {
   return <h2 className="font-display text-5xl uppercase leading-[0.9] md:text-7xl">{children}</h2>;
 }
 
+function Schedule() {
+  const [day, setDay] = useState(0);
+  const [today, setToday] = useState(-1);
+  useEffect(() => {
+    const d = new Date().getDay() - 1;
+    if (d >= 0 && d < 5) { setDay(d); setToday(d); }
+  }, []);
+  return (
+    <div className="mt-10">
+      <div role="tablist" aria-label="Día" className="grid grid-cols-5 gap-2">
+        {days.map((d, i) => (
+          <button key={d} role="tab" aria-selected={day === i} onClick={() => setDay(i)}
+            className={`relative py-3 font-cond text-sm font-extrabold uppercase tracking-widest transition-colors md:text-base ${day === i ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground hover:text-foreground"}`}>
+            <span className="md:hidden">{d.slice(0, 3)}</span><span className="hidden md:inline">{d}</span>
+            {today === i && <span className="absolute -top-2 right-1 bg-foreground px-1.5 font-cond text-[10px] text-background">HOY</span>}
+          </button>
+        ))}
+      </div>
+      <ul className="mt-4 divide-y divide-border border-2 border-border bg-background">
+        {schedule.map(([h, row]) => {
+          const [c, who] = row[day]!;
+          return (
+            <li key={h} className="flex items-center gap-5 p-4 transition-colors hover:bg-secondary md:gap-8 md:px-6">
+              <span className="w-24 shrink-0 font-display text-2xl text-primary md:w-32 md:text-3xl">{h}</span>
+              <span className="flex-1">
+                <span className="block font-display text-2xl uppercase leading-none md:text-3xl">{c}</span>
+                <span className="font-cond text-xs uppercase tracking-widest text-muted-foreground">con {who}</span>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
@@ -82,7 +100,7 @@ function Index() {
             <img src={logo.url} alt="JCV Fitness Center" className="h-full w-full object-cover object-center" />
           </a>
           <nav className="hidden gap-7 font-cond text-sm font-bold uppercase tracking-widest md:flex">
-            {["Planes", "Clases", "Coaches", "Instalaciones", "Sucursales"].map((l) => (
+            {["Planes", "Clases", "Instalaciones", "Sucursales"].map((l) => (
               <a key={l} href={`#${l.toLowerCase()}`} className="text-muted-foreground transition-colors hover:text-primary">{l}</a>
             ))}
           </nav>
@@ -172,68 +190,13 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5">
           <Kicker>Clases grupales · JCV Mega Mall</Kicker>
           <Title>Horarios</Title>
-          <div className="mt-10 overflow-x-auto">
-            <table className="w-full min-w-[760px] border-collapse">
-              <thead>
-                <tr className="bg-primary text-primary-foreground">
-                  <th className="p-3 text-left font-cond font-extrabold uppercase tracking-widest">Hora</th>
-                  {days.map((d) => <th key={d} className="p-3 text-left font-cond font-extrabold uppercase tracking-widest">{d}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {schedule.map(([h, row]) => (
-                  <tr key={h} className="border-b border-border">
-                    <td className="p-3 font-display text-xl text-primary">{h}</td>
-                    {row.map(([c, who], i) => (
-                      <td key={i} className="p-3 transition-colors hover:bg-secondary">
-                        <p className="font-bold uppercase leading-tight">{c}</p>
-                        <p className="font-cond text-xs uppercase tracking-widest text-muted-foreground">{who}</p>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <Schedule />
+          <div className="mt-10">
             <div className="border-l-4 border-primary bg-background p-6">
               <p className="font-display text-3xl uppercase">Box con Coach Pablo</p>
               <p className="mt-3 text-muted-foreground"><b className="text-foreground">Paseo Solidaridad:</b> 8:15 AM y 7:00 PM · lunes a viernes</p>
               <p className="text-muted-foreground"><b className="text-foreground">Mega Mall:</b> 9:15 AM martes y jueves · 5:15 PM lunes a viernes</p>
             </div>
-            <img src={horario.url} alt="Flyer de horarios" className="hidden h-full max-h-56 w-full object-cover object-top md:block" />
-          </div>
-        </div>
-      </section>
-
-      {/* COACHES */}
-      <section id="coaches" className="py-20">
-        <div className="mx-auto max-w-7xl px-5">
-          <Kicker>Team JCV</Kicker>
-          <Title>Los que te<br /><span className="text-primary">empujan.</span></Title>
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {coaches.map((c) => (
-              <article key={c.name} className="group overflow-hidden bg-card">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  {c.photo ? (
-                    <img src={c.photo} alt={c.name} className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0" />
-                  ) : (
-                    <div className="stripe-bg flex h-full w-full items-center justify-center opacity-90">
-                      <div className="bg-background px-4 py-3 text-center">
-                        <p className="font-cond text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">Foto de</p>
-                        <p className="font-display text-2xl uppercase">{c.name}</p>
-                      </div>
-                    </div>
-                  )}
-                  {c.tag && <span className="absolute left-0 top-3 bg-primary px-3 py-1 font-cond text-xs font-extrabold uppercase tracking-widest text-primary-foreground">{c.tag}</span>}
-                </div>
-                <div className="border-t-4 border-primary p-4">
-                  <h3 className="font-display text-2xl uppercase leading-none">{c.name}</h3>
-                  <p className="mt-1 font-cond text-sm font-bold uppercase tracking-widest text-primary">{c.role}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.info}</p>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -248,13 +211,17 @@ function Index() {
               <img src={floor.url} alt="Área de máquinas" className="h-full w-full object-cover" />
               <figcaption className="absolute bottom-0 left-0 bg-primary px-4 py-2 font-display text-2xl uppercase text-primary-foreground">Panatta · Gymleco · Life Fitness</figcaption>
             </figure>
-            <figure className="relative overflow-hidden">
-              <img src={spinning.url} alt="Nuevo salón de spinning" className="aspect-square w-full object-cover" />
+            <figure className="relative overflow-hidden md:row-span-2">
+              <img src={spinning.url} alt="Salón de spinning renovado" className="h-full max-h-[640px] w-full object-cover md:max-h-none" />
               <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-cond font-extrabold uppercase">Spinning renovado · +$300,000</figcaption>
             </figure>
             <figure className="relative overflow-hidden">
-              <img src={fachada.url} alt="Fachada JCV Mega Mall" className="aspect-square w-full object-cover" />
-              <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-cond font-extrabold uppercase">Fachada JCV Mega</figcaption>
+              <img src={power.url} alt="Socia haciendo peso muerto en el Área Power" className="aspect-square w-full object-cover object-top" />
+              <figcaption className="absolute bottom-0 left-0 bg-primary px-3 py-2 font-cond font-extrabold uppercase text-primary-foreground">Área Power</figcaption>
+            </figure>
+            <figure className="relative overflow-hidden md:col-span-2">
+              <img src={mancuernas.url} alt="Rack de mancuernas" className="aspect-square w-full object-cover md:aspect-[2/1]" />
+              <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-cond font-extrabold uppercase">Mancuernas de sobra</figcaption>
             </figure>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
