@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { Index } from "@/routes/index";
 
 // El número de WhatsApp de JCV Fitness Center en Hermosillo.
-const WA_NUMBER = "662 112 3641";
+const WA_NUMBER = "662 216 4433 ";
 const WA_LINK = "https://wa.me/526621123641";
 
 describe("Contacto de JCV Fitness Center", () => {

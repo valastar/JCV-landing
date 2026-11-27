@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Pesas, clases grupales, box y nutrióloga en 2 sucursales en Hermosillo. Mensualidad $950, inscripción $0. WhatsApp 662 112 3641.",
+          "Pesas, clases grupales, box y nutrióloga en 2 sucursales en Hermosillo. Mensualidad $950, inscripción $0. WhatsApp 662 216 4433 .",
       },
       { property: "og:title", content: "JCV Fitness Center | Hermosillo" },
       {
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 const IG = "https://www.instagram.com/jcvfitnesscenter/";
 const WHATSAPP =
   "https://wa.me/526621123641?text=Hola%20JCV%2C%20quiero%20informaci%C3%B3n%20de%20planes";
-const WA_PHONE = "662 112 3641";
+const WA_PHONE = "662 216 4433 ";
 
 const plans = [
   { name: "Día", price: "150", note: "Visita de un día" },
