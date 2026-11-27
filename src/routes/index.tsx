@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "JCV Fitness Center | Gimnasio en Hermosillo sin inscripción" },
-      { name: "description", content: "Pesas, clases grupales, box y nutrióloga en 2 sucursales en Hermosillo. Mensualidad $950, inscripción $0." },
+      { name: "description", content: "Pesas, clases grupales, box y nutrióloga en 2 sucursales en Hermosillo. Mensualidad $950, inscripción $0. WhatsApp 662 112 3641." },
       { property: "og:title", content: "JCV Fitness Center | Hermosillo" },
       { property: "og:description", content: "Pesas, clases grupales, box y nutrióloga. Inscripción $0." },
       { property: "og:type", content: "website" },
@@ -21,7 +21,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WA = "https://www.instagram.com/jcvfitnesscenter/";
+const IG = "https://www.instagram.com/jcvfitnesscenter/";
+const WHATSAPP = "https://wa.me/526621123641?text=Hola%20JCV%2C%20quiero%20informaci%C3%B3n%20de%20planes";
+const WA_PHONE = "662 112 3641";
 
 const plans = [
   { name: "Día", price: "150", note: "Visita de un día" },
@@ -47,6 +49,14 @@ function Kicker({ children }: { children: React.ReactNode }) {
       <span className="h-[3px] w-10 bg-primary" />
       {children}
     </p>
+  );
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.53.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.03 1.02-1.03 2.48s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.41Z" />
+    </svg>
   );
 }
 
@@ -90,7 +100,7 @@ function Schedule() {
   );
 }
 
-function Index() {
+export function Index() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       {/* NAV */}
@@ -100,7 +110,7 @@ function Index() {
             <img src={logo} alt="JCV Fitness Center" className="h-full w-full object-cover object-center" />
           </a>
           <nav className="hidden gap-7 font-cond text-sm font-bold uppercase tracking-widest md:flex">
-            {["Planes", "Clases", "Instalaciones", "Sucursales"].map((l) => (
+            {["Planes", "Clases", "Instalaciones", "Sucursales", "Contacto"].map((l) => (
               <a key={l} href={`#${l.toLowerCase()}`} className="text-muted-foreground transition-colors hover:text-primary">{l}</a>
             ))}
           </nav>
@@ -253,18 +263,67 @@ function Index() {
         </div>
       </section>
 
+      {/* CONTACTO */}
+      <section id="contacto" className="border-t-4 border-primary bg-card py-20">
+        <div className="mx-auto max-w-7xl px-5">
+          <Kicker>Contacto</Kicker>
+          <Title>Escríbenos.<br /><span className="text-primary">Te contestamos.</span></Title>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer"
+              className="flex items-center gap-6 border-2 border-whatsapp bg-whatsapp/10 p-8 transition-colors hover:bg-whatsapp/20">
+              <WhatsAppIcon className="h-14 w-14 shrink-0 text-whatsapp" />
+              <span>
+                <span className="block font-display text-4xl uppercase leading-none">WhatsApp</span>
+                <span className="mt-2 block font-cond text-2xl font-extrabold uppercase tracking-widest text-whatsapp">{WA_PHONE}</span>
+                <span className="font-cond text-xs uppercase tracking-widest text-muted-foreground">Toca para abrir el chat</span>
+              </span>
+            </a>
+            <a href={IG} target="_blank" rel="noreferrer"
+              className="flex flex-col justify-center border-2 border-border p-8 transition-colors hover:border-primary">
+              <span className="font-display text-4xl uppercase leading-none">Instagram</span>
+              <span className="mt-2 font-cond text-2xl font-extrabold uppercase tracking-widest text-primary">@jcvfitnesscenter</span>
+              <span className="font-cond text-xs uppercase tracking-widest text-muted-foreground">Fotos, promos y clases nuevas</span>
+            </a>
+          </div>
+          <p className="mt-6 font-cond text-sm uppercase tracking-widest text-muted-foreground">
+            También por WhatsApp al {WA_PHONE} si quieres horarios, precios o saber qué incluye tu mensualidad.
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="stripe-bg py-3">
         <div className="bg-background py-16 text-center">
           <p className="font-display text-6xl uppercase md:text-8xl">Challenge your <span className="text-primary">limits.</span></p>
-          <a href={WA} target="_blank" rel="noreferrer" className="skew-btn mt-8 inline-block bg-primary px-10 py-4 font-cond text-xl font-extrabold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-105">
-            <span>@jcvfitnesscenter</span>
-          </a>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer" className="skew-btn inline-block bg-whatsapp px-10 py-4 font-cond text-xl font-extrabold uppercase tracking-wider text-whatsapp-foreground transition-transform hover:scale-105">
+              <span>Escríbenos por WhatsApp</span>
+            </a>
+            <a href={IG} target="_blank" rel="noreferrer" className="skew-btn inline-block bg-primary px-10 py-4 font-cond text-xl font-extrabold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-105">
+              <span>@jcvfitnesscenter</span>
+            </a>
+          </div>
         </div>
       </section>
 
+      <a href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Escríbenos por WhatsApp"
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-whatsapp px-5 py-4 text-whatsapp-foreground shadow-2xl transition-transform hover:scale-105">
+        <WhatsAppIcon className="h-8 w-8" />
+        <span className="hidden font-cond text-sm font-extrabold uppercase tracking-widest sm:inline">WhatsApp</span>
+      </a>
+
       <footer className="border-t border-border py-8 text-center font-cond text-sm uppercase tracking-widest text-muted-foreground">
-        © {new Date().getFullYear()} JCV Fitness Center · Hermosillo, Sonora
+        <p>© {new Date().getFullYear()} JCV Fitness Center · Hermosillo, Sonora</p>
+        <p className="mt-2">
+          WhatsApp:{" "}
+          <a href={WHATSAPP} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+            escríbenos
+          </a>{" "}
+          · Instagram:{" "}
+          <a href={IG} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+            @jcvfitnesscenter
+          </a>
+        </p>
       </footer>
     </div>
   );
