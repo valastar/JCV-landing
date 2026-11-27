@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Images live as real files in src/assets and are imported directly (no .asset.json pointers): the site is also deployed to Vercel, where Lovable CDN paths 404.

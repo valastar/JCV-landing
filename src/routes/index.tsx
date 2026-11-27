@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo.png.asset.json";
-import floor from "@/assets/floor.png.asset.json";
-import planes from "@/assets/planes.jpg.asset.json";
-import spinning from "@/assets/spinning2.png.asset.json";
-import power from "@/assets/power.png.asset.json";
-import mancuernas from "@/assets/mancuernas.png.asset.json";
+import logo from "@/assets/logo.png";
+import floor from "@/assets/floor.png";
+import planes from "@/assets/planes.jpg";
+import spinning from "@/assets/spinning2.png";
+import power from "@/assets/power.png";
+import mancuernas from "@/assets/mancuernas.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -97,7 +97,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
           <a href="#inicio" className="block h-12 w-40 overflow-hidden">
-            <img src={logo.url} alt="JCV Fitness Center" className="h-full w-full object-cover object-center" />
+            <img src={logo} alt="JCV Fitness Center" className="h-full w-full object-cover object-center" />
           </a>
           <nav className="hidden gap-7 font-cond text-sm font-bold uppercase tracking-widest md:flex">
             {["Planes", "Clases", "Instalaciones", "Sucursales"].map((l) => (
@@ -112,7 +112,7 @@ function Index() {
 
       {/* HERO */}
       <section id="inicio" className="clip-slant relative flex min-h-[100svh] items-end overflow-hidden pb-28 pt-24">
-        <img src={floor.url} alt="Piso de pesas de JCV Fitness Center" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={floor} alt="Piso de pesas de JCV Fitness Center" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10" />
         <div className="absolute inset-y-0 left-0 w-2 bg-primary" />
         <div className="relative mx-auto w-full max-w-7xl px-5">
@@ -180,7 +180,7 @@ function Index() {
                 </div>
               </div>
             </div>
-            <img src={planes.url} alt="Flyer oficial de planes de pago JCV" className="w-full rotate-2 border-4 border-primary shadow-2xl" />
+            <img src={planes} alt="Flyer oficial de planes de pago JCV" className="w-full rotate-2 border-4 border-primary shadow-2xl" />
           </div>
         </div>
       </section>
@@ -208,19 +208,19 @@ function Index() {
           <Title>Hecho para<br /><span className="text-primary">sudar.</span></Title>
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             <figure className="relative overflow-hidden md:col-span-2 md:row-span-2">
-              <img src={floor.url} alt="Área de máquinas" className="h-full w-full object-cover" />
+              <img src={floor} alt="Área de máquinas" className="h-full w-full object-cover" />
               <figcaption className="absolute bottom-0 left-0 bg-primary px-4 py-2 font-display text-2xl uppercase text-primary-foreground">Panatta · Gymleco · Life Fitness</figcaption>
             </figure>
             <figure className="relative overflow-hidden md:row-span-2">
-              <img src={spinning.url} alt="Salón de spinning renovado" className="h-full max-h-[640px] w-full object-cover md:max-h-none" />
+              <img src={spinning} alt="Salón de spinning renovado" className="h-full max-h-[640px] w-full object-cover md:max-h-none" />
               <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-cond font-extrabold uppercase">Spinning renovado · +$300,000</figcaption>
             </figure>
             <figure className="relative overflow-hidden">
-              <img src={power.url} alt="Socia haciendo peso muerto en el Área Power" className="aspect-square w-full object-cover object-top" />
+              <img src={power} alt="Socia haciendo peso muerto en el Área Power" className="aspect-square w-full object-cover object-top" />
               <figcaption className="absolute bottom-0 left-0 bg-primary px-3 py-2 font-cond font-extrabold uppercase text-primary-foreground">Área Power</figcaption>
             </figure>
             <figure className="relative overflow-hidden md:col-span-2">
-              <img src={mancuernas.url} alt="Rack de mancuernas" className="aspect-square w-full object-cover md:aspect-[2/1]" />
+              <img src={mancuernas} alt="Rack de mancuernas" className="aspect-square w-full object-cover md:aspect-[2/1]" />
               <figcaption className="absolute bottom-0 left-0 bg-background px-3 py-2 font-cond font-extrabold uppercase">Mancuernas de sobra</figcaption>
             </figure>
           </div>
