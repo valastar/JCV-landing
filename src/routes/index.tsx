@@ -440,7 +440,7 @@ export function Index() {
 
       {/* SUCURSALES */}
       <section id="sucursales" className="py-20">
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-7xl px-5">
           <Kicker>Sucursales</Kicker>
           <Title>Ven hoy.</Title>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
